@@ -1,3 +1,6 @@
+import java_cup.runtime.*;
+import java.util.*;
+
 %%
 
 %cup
