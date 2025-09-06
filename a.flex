@@ -14,12 +14,12 @@ import java.util.*;
 
 LETRA = [a-zA-Z]
 DIGITO = [0-9]
-ESPACIO = [\t\f\n\r\n]+
-ID = {LETRA} ({LETRA}|{DIGITO}|"_")*
+ESPACIO = [ \t\f\n\r\n]+
+ID = {LETRA}({LETRA}|{DIGITO}|"_")*({LETRA}|{DIGITO})+
 CONST_INT = {DIGITO}+
-CONST_STR = "'" ~ "'" // no se si se pueden escapar las " 
-CONST_REAL = {DIGITO}* “.”{DIGITO}+ | {DIGITO} “.”{DIGITO}*
-CONST_HEX = 0h ({DIGITO}|[A-F]|[a-f])+
+CONST_STR = "'" ~ "'"
+CONST_REAL = {DIGITO}*"."{DIGITO}+|{DIGITO}“.”{DIGITO}*
+CONST_HEX = 0h({DIGITO}|[A-F]|[a-f])*
 COMENTARIO = "/*" ~ "/*" ~ "*/" ~ "*/" | "/*" ~ "*/"
 
 
@@ -65,9 +65,17 @@ COMENTARIO = "/*" ~ "/*" ~ "*/" ~ "*/" | "/*" ~ "*/"
 "IS"      { System.out.println("Token IS encontrado, Lexema " + yytext()); }
 "STEP"    { System.out.println("Token STEP encontrado, Lexema " + yytext()); }
 "NEXT"    { System.out.println("Token NEXT encontrado, Lexema " + yytext()); }
+"DECVAR" { System.out.println("Token DECVAR encontrado, Lexema " + yytext()); }
+"ENDDECVAR" { System.out.println("Token ENDDECVAR encontrado, Lexema " + yytext()); }
+"PRINT" { System.out.println("Token PRINT encontrado, Lexema " + yytext()); }
+"PROGRAM.SECTION" { System.out.println("Token PROGRAM.SECTION encontrado, Lexema " + yytext()); }
+"ENDPROGRAM.SECTION" { System.out.println("Token ENDPROGRAM.SECTION encontrado, Lexema " + yytext()); }
 
 {ID}         {System.out.println("Token ID encontrado, Lexema " + yytext());}
 {CONST_INT}  {System.out.println("Token CONST_INT encontrado, Lexema " + yytext());}
+{CONST_STR} {System.out.println("Token CONST_STR encontrado, Lexema " + yytext());}
+{CONST_REAL} {System.out.println("Token CONST_REAL encontrado, Lexema " + yytext());}
+{CONST_HEX} {System.out.println("Token CONST_HEX encontrado, Lexema " + yytext());}
 {ESPACIO}    {}
 {COMENTARIO} {}
 
